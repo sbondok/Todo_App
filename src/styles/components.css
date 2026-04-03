@@ -1,0 +1,325 @@
+/* ========================================
+   COMPONENTS — Input, Todo List, Filters
+   ======================================== */
+
+/* ---- Todo Input Card ---- */
+.todo-input-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 580px) {
+  .todo-input-card {
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    gap: 24px;
+  }
+}
+
+.todo-input {
+  flex: 1;
+  font-size: 0.75rem;
+  color: var(--color-text);
+  caret-color: var(--color-primary);
+  letter-spacing: -0.17px;
+}
+
+.todo-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 580px) {
+  .todo-input {
+    font-size: 1rem;
+    letter-spacing: -0.25px;
+  }
+}
+
+/* ---- Checkbox Circle ---- */
+.checkbox-circle {
+  flex-shrink: 0;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border-radius: var(--radius-circle);
+  border: 1px solid var(--color-checkbox-border);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+@media (max-width: 579px) {
+  .checkbox-circle {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Gradient border on hover for unchecked */
+.todo-item:not(.completed) .checkbox-circle:hover {
+  border-color: transparent;
+  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+              var(--gradient-check) border-box;
+  border: 1px solid transparent;
+}
+
+/* Completed checkbox — gradient fill + check icon */
+.todo-item.completed .checkbox-circle {
+  border: none;
+  background: var(--gradient-check);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item.completed .checkbox-circle::after {
+  content: '';
+  display: block;
+  width: 11px;
+  height: 9px;
+  background-image: url('/images/icon-check.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ---- Todo Panel (list + status bar) ---- */
+.todo-panel {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ---- Todo List ---- */
+.todo-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling */
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--color-checkbox-border);
+  border-radius: 3px;
+}
+
+/* ---- Todo Item ---- */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  cursor: grab;
+  transition: background-color 0.2s ease;
+}
+
+@media (min-width: 580px) {
+  .todo-item {
+    padding: var(--item-padding);
+    gap: 24px;
+  }
+}
+
+.todo-item:hover {
+  background-color: color-mix(in srgb, var(--bg-card) 90%, var(--color-text) 10%);
+}
+
+/* Todo text */
+.todo-text {
+  flex: 1;
+  font-size: 0.75rem;
+  color: var(--color-text);
+  letter-spacing: -0.17px;
+  transition: color 0.3s ease;
+  user-select: none;
+  word-break: break-word;
+}
+
+@media (min-width: 580px) {
+  .todo-text {
+    font-size: 1rem;
+    letter-spacing: -0.25px;
+  }
+}
+
+/* Completed state text */
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--color-text-completed);
+}
+
+/* Delete button */
+.todo-delete {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 580px) {
+  .todo-delete {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Always show delete on mobile (touch devices) */
+@media (max-width: 579px) {
+  .todo-delete {
+    opacity: 1;
+  }
+}
+
+.todo-item:hover .todo-delete {
+  opacity: 1;
+}
+
+.todo-delete:hover {
+  transform: scale(1.2);
+}
+
+.todo-delete img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Drag states ---- */
+.todo-item.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.todo-item.drag-over {
+  border-top: 2px solid var(--color-primary);
+}
+
+/* ---- Status Bar ---- */
+.todo-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 580px) {
+  .todo-status-bar {
+    padding: 16px 24px;
+    font-size: 0.8rem;
+  }
+}
+
+.items-left {
+  letter-spacing: -0.17px;
+}
+
+/* Clear completed button */
+.clear-completed-btn {
+  font-size: inherit;
+  color: var(--color-text-muted);
+  letter-spacing: -0.17px;
+  transition: color 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+  color: var(--color-text-hover);
+}
+
+/* ---- Filters ---- */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Desktop filters (inside status bar) */
+.desktop-filters {
+  display: none;
+}
+
+@media (min-width: 580px) {
+  .desktop-filters {
+    display: flex;
+  }
+}
+
+/* Mobile filters (separate card) */
+.filters-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 15px 20px;
+  margin-top: 16px;
+  box-shadow: var(--shadow);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 580px) {
+  .filters-card {
+    display: none;
+  }
+}
+
+/* Filter button */
+.filter-btn {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-filter);
+  letter-spacing: -0.19px;
+  transition: color 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--color-filter-hover);
+}
+
+.filter-btn.active {
+  color: var(--color-primary);
+}
+
+/* ---- Drag Hint ---- */
+.drag-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 40px;
+  letter-spacing: -0.19px;
+}
+
+@media (min-width: 580px) {
+  .drag-hint {
+    margin-top: 50px;
+  }
+}
+
+/* ---- Empty State ---- */
+.todo-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}

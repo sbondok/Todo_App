@@ -1,0 +1,69 @@
+/* ========================================
+   THEME — Light & Dark Theme Variables
+   ======================================== */
+
+/* Dark theme (default) */
+[data-theme="dark"] {
+  --bg-body: hsl(235, 21%, 11%);
+  --bg-card: hsl(235, 24%, 19%);
+  --color-text: hsl(234, 39%, 85%);
+  --color-text-hover: hsl(236, 33%, 92%);
+  --color-text-muted: hsl(234, 11%, 52%);
+  --color-text-completed: hsl(233, 14%, 35%);
+  --color-border: hsl(237, 14%, 26%);
+  --color-checkbox-border: hsl(233, 14%, 35%);
+  --color-filter: hsl(234, 11%, 52%);
+  --color-filter-hover: hsl(236, 33%, 92%);
+  --shadow: var(--shadow-card);
+  
+  --bg-image-mobile: url('/images/bg-mobile-dark.jpg');
+  --bg-image-desktop: url('/images/bg-desktop-dark.jpg');
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg-body: hsl(0, 0%, 98%);
+  --bg-card: hsl(0, 0%, 100%);
+  --color-text: hsl(235, 19%, 35%);
+  --color-text-hover: hsl(235, 19%, 35%);
+  --color-text-muted: hsl(236, 9%, 61%);
+  --color-text-completed: hsl(233, 11%, 84%);
+  --color-border: hsl(233, 11%, 84%);
+  --color-checkbox-border: hsl(233, 11%, 84%);
+  --color-filter: hsl(236, 9%, 61%);
+  --color-filter-hover: hsl(235, 19%, 35%);
+  --shadow: var(--shadow-card-light);
+}
+
+[data-theme="light"] {
+  --bg-image-mobile: url('/images/bg-mobile-light.jpg');
+  --bg-image-desktop: url('/images/bg-desktop-light.jpg');
+}
+
+/* Apply theme background */
+body {
+  background-color: var(--bg-body);
+  color: var(--color-text);
+}
+
+/* Background image */
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-image: var(--bg-image-mobile);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: background-image 0.3s ease;
+}
+
+@media (min-width: 580px) {
+  .bg-image {
+    height: var(--header-height);
+    background-image: var(--bg-image-desktop);
+  }
+}

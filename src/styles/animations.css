@@ -1,0 +1,89 @@
+/* ========================================
+   ANIMATIONS — Transitions & Micro-animations
+   ======================================== */
+
+/* Theme transition on all cards */
+.todo-input-card,
+.todo-panel,
+.filters-card {
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Todo item entrance animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item {
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Todo item exit animation */
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 80px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+  }
+}
+
+.todo-item.removing {
+  animation: slideOut 0.3s ease forwards;
+  overflow: hidden;
+}
+
+/* Theme icon spin */
+@keyframes spinIn {
+  from {
+    transform: rotate(-90deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.theme-icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-icon.spin {
+  animation: spinIn 0.4s ease forwards;
+}
+
+/* Checkbox pulse on complete */
+@keyframes checkPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.todo-item.just-completed .checkbox-circle {
+  animation: checkPulse 0.3s ease;
+}
+
+/* Background image crossfade */
+.bg-image {
+  transition: opacity 0.5s ease;
+}
+
+/* Smooth scrollbar */
+.todo-list {
+  scroll-behavior: smooth;
+}
