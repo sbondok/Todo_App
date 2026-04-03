@@ -62,8 +62,9 @@ export class ThemeToggle {
   applyTheme(theme, animate) {
     this.htmlEl.setAttribute('data-theme', theme);
 
-    // Update icon
-    const iconSrc = theme === 'dark' ? '/images/icon-sun.svg' : '/images/icon-moon.svg';
+    // Update icon (use BASE_URL for correct path in production)
+    const base = import.meta.env.BASE_URL;
+    const iconSrc = theme === 'dark' ? `${base}images/icon-sun.svg` : `${base}images/icon-moon.svg`;
     this.iconEl.src = iconSrc;
 
     // Animate icon
